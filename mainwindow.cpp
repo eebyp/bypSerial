@@ -25,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     , txBytes(0)
 {
     ui->setupUi(this);
-    setWindowTitle("bypSerial - 串口监视器 v1.0.0");
+    setWindowTitle(QStringLiteral("bypSerial - 串口监视器 v%1")
+                       .arg(QCoreApplication::applicationVersion()));
     
     // 窗口/任务栏图标：从编译进 exe 的 Qt 资源取，不依赖外部文件路径
     QIcon appIcon(":/bypSerial.png");
@@ -388,50 +389,54 @@ void MainWindow::createMenuBar()
 void MainWindow::onHelp()
 {
     QMessageBox::information(this, "bypSerial 使用说明",
-        "<h3>bypSerial 串口监视器 v1.0.0</h3>"
-        "<p><b>BYP 工具系列</b> - 嵌入式开发调试工具</p>"
-        "<hr>"
-        "<h4>基本操作</h4>"
-        "<ul>"
-        "<li><b>刷新串口</b>：扫描系统可用的 COM 端口</li>"
-        "<li><b>打开/关闭串口</b>：连接或断开串口</li>"
-        "<li><b>波特率</b>：支持 9600 ~ 921600，也可手动输入</li>"
-        "</ul>"
-        "<h4>数据收发</h4>"
-        "<ul>"
-        "<li><b>HEX 显示</b>：以十六进制格式显示接收数据</li>"
-        "<li><b>HEX 发送</b>：以十六进制格式发送数据（如 FF 0A 1B）</li>"
-        "<li><b>自动滚动</b>：新数据到达时自动滚动到底部</li>"
-        "</ul>"
-        "<h4>日志管理</h4>"
-        "<ul>"
-        "<li><b>清空</b>：清除当前显示的所有日志</li>"
-        "<li><b>保存日志</b>：将收发记录导出为 TXT 文件</li>"
-        "</ul>"
-        "<hr>"
-        "<p><i>提示：按 F1 可随时查看此帮助</i></p>",
+        QStringLiteral(
+            "<h3>bypSerial 串口监视器 v%1</h3>"
+            "<p><b>BYP 工具系列</b> - 嵌入式开发调试工具</p>"
+            "<hr>"
+            "<h4>基本操作</h4>"
+            "<ul>"
+            "<li><b>刷新串口</b>：扫描系统可用的 COM 端口</li>"
+            "<li><b>打开/关闭串口</b>：连接或断开串口</li>"
+            "<li><b>波特率</b>：支持 9600 ~ 921600，也可手动输入</li>"
+            "</ul>"
+            "<h4>数据收发</h4>"
+            "<ul>"
+            "<li><b>HEX 显示</b>：以十六进制格式显示接收数据</li>"
+            "<li><b>HEX 发送</b>：以十六进制格式发送数据（如 FF 0A 1B）</li>"
+            "<li><b>自动滚动</b>：新数据到达时自动滚动到底部</li>"
+            "</ul>"
+            "<h4>日志管理</h4>"
+            "<ul>"
+            "<li><b>清空</b>：清除当前显示的所有日志</li>"
+            "<li><b>保存日志</b>：将收发记录导出为 TXT 文件</li>"
+            "</ul>"
+            "<hr>"
+            "<p><i>提示：按 F1 可随时查看此帮助</i></p>")
+            .arg(QCoreApplication::applicationVersion()),
         QMessageBox::Ok);
 }
 
 void MainWindow::onAbout()
 {
     QMessageBox::about(this, "关于 bypSerial",
-        "<h2>bypSerial v1.0.0</h2>"
-        "<p><b>串口监视器</b></p>"
-        "<p>BYP 工具系列 - 嵌入式开发调试工具</p>"
-        "<hr>"
-        "<p><b>功能特性</b></p>"
-        "<ul>"
-        "<li>自动枚举可用串口</li>"
-        "<li>支持常用波特率（9600 ~ 921600）</li>"
-        "<li>实时接收数据显示（文本/HEX）</li>"
-        "<li>数据发送（文本/HEX）</li>"
-        "<li>收发字节统计</li>"
-        "<li>日志保存功能</li>"
-        "</ul>"
-        "<hr>"
-        "<p><b>技术栈</b></p>"
-        "<p>Qt 6.x + QSerialPort</p>"
-        "<hr>"
-        "<p style='color: gray;'>© 2026 BYP Tools Series</p>");
+        QStringLiteral(
+            "<h2>bypSerial v%1</h2>"
+            "<p><b>串口监视器</b></p>"
+            "<p>BYP 工具系列 - 嵌入式开发调试工具</p>"
+            "<hr>"
+            "<p><b>功能特性</b></p>"
+            "<ul>"
+            "<li>自动枚举可用串口</li>"
+            "<li>支持常用波特率（9600 ~ 921600）</li>"
+            "<li>实时接收数据显示（文本/HEX）</li>"
+            "<li>数据发送（文本/HEX）</li>"
+            "<li>收发字节统计</li>"
+            "<li>日志保存功能</li>"
+            "</ul>"
+            "<hr>"
+            "<p><b>技术栈</b></p>"
+            "<p>Qt 6.x + QSerialPort</p>"
+            "<hr>"
+            "<p style='color: gray;'>© 2026 BYP Tools Series</p>")
+            .arg(QCoreApplication::applicationVersion()));
 }

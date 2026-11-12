@@ -103,6 +103,7 @@ bypSerial/
 ├── build-release.ps1   # Windows 一键 Release 构建 + windeployqt
 ├── .gitignore
 ├── LICENSE
+├── CHANGELOG.md        # 版本变更记录
 └── README.md
 ```
 
@@ -120,6 +121,26 @@ Linux / macOS 理论上可以编译，但未做实际验证。
 - 暂无发送行尾追加（`\r\n`）选项，需要时可用 HEX 发送 `0D 0A`
 - 文本模式按 `\n` 分帧：对端长时间不发换行时，缓冲区超过 4 KB 会强制输出一行
 
+## 版本与发布
+
+版本号只在 `bypSerial.pro` 的 `VERSION` 一处维护。窗口标题、帮助/关于对话框、
+exe 的文件版本信息、`build-release.ps1` 打出的发布包名全部由它派生，不会再出现
+代码里写死版本号、忘记同步的情况。
+
+递增判据：
+
+- **主版本**（`1.x` → `2.0`）：新增功能能力，如定时发送、多串口会话
+- **次版本**（`1.0` → `1.1`）：界面重做、既有缺陷全修、框架/工具链迁移等精修升级
+- **修订号**（`1.0.0` → `1.0.1`）：少量单点修复，功能集合不变
+
+发版流程：
+
+1. 改 `bypSerial.pro` 的 `VERSION`
+2. 在 [CHANGELOG.md](CHANGELOG.md) 的「未发布」下补条目，发版时改成版本号 + 日期
+3. 运行 `build-release.ps1`，得到 `build-release\release\` 与 `bypSerial-v<版本>-win64.zip`
+4. `git commit` → `git tag -a v<版本> -m "bypSerial v<版本>"` → `git push --tags`
+5. GitHub Releases 上传 zip，正文用 CHANGELOG 对应小节
+
 ## 许可证
 
 [MIT License](LICENSE) © 2026 白毅平
@@ -130,5 +151,5 @@ BYP Tools Series · [@eebyp](https://github.com/eebyp)
 
 ---
 
-**版本**: 1.0.0  
-**更新日期**: 2026-11-12
+**版本**: 1.0.0（以 `bypSerial.pro` 的 `VERSION` 为准）  
+**更新日期**: 2026-11-08
